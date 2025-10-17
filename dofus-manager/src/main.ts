@@ -189,7 +189,7 @@ Alpine.data('itemManager', () => ({
   },
 
   formatPercent(num: number): string {
-    return `${num.toFixed(2)}%`;
+    return num.toFixed(2); // Juste le nombre, pas de %
   },
 
   getDifficultyColor(difficulty: string): string {
@@ -209,6 +209,26 @@ Alpine.data('itemManager', () => ({
     if (profit > 0) return 'text-emerald-400';
     if (profit < 0) return 'text-red-400';
     return 'text-slate-400';
+  },
+
+  // Formatage des inputs
+  formatInputNumber(event: any, field: string) {
+    let value = event.target.value.replace(/\s/g, ''); // Enlève les espaces
+    if (value === '') {
+      (this.formData as any)[field] = 0;
+      event.target.value = '';
+      return;
+    }
+    const number = parseFloat(value);
+    if (!isNaN(number)) {
+      (this.formData as any)[field] = number;
+      event.target.value = this.formatNumber(number);
+    }
+  },
+
+  getDisplayValue(field: string): string {
+    const value = (this.formData as any)[field];
+    return value && value !== 0 ? this.formatNumber(value) : '';
   }
 }));
 
