@@ -11,20 +11,20 @@ export class CalculatorService {
    * Calcule toutes les métriques pour un item
    */
   static calculateMetrics(item: Item): ItemCalculations {
-    const unitCraftCost = this.calculateUnitCraftCost(
-      item.craftCost,
+    const costPerItem = this.calculateCostPerItem(
+      item.lotCost,
       item.forgemageCost,
       item.quantity
     );
 
     const totalInvestment = this.calculateTotalInvestment(
-      item.craftCost,
+      item.lotCost,
       item.forgemageCost
     );
 
     const profitPerItem = this.calculateProfitPerItem(
       item.salePrice,
-      unitCraftCost
+      costPerItem
     );
 
     const totalProfit = this.calculateTotalProfit(
@@ -34,11 +34,11 @@ export class CalculatorService {
 
     const yieldValue = this.calculateYield(
       item.salePrice,
-      unitCraftCost
+      costPerItem
     );
 
     return {
-      unitCraftCost: this.roundToTwo(unitCraftCost),
+      costPerItem: this.roundToTwo(costPerItem),
       totalInvestment: this.roundToTwo(totalInvestment),
       profitPerItem: this.roundToTwo(profitPerItem),
       totalProfit: this.roundToTwo(totalProfit),
@@ -57,40 +57,40 @@ export class CalculatorService {
   }
 
   /**
-   * Coût unitaire = (coût craft + coût forgemagie) / quantité
+   * Coût par item = (Coût du lot + Coût de fm) / Quantité
    */
-  private static calculateUnitCraftCost(
-    craftCost: number,
+  private static calculateCostPerItem(
+    lotCost: number,
     forgemageCost: number,
     quantity: number
   ): number {
     if (quantity <= 0) return 0;
-    return (craftCost + forgemageCost) / quantity;
+    return (lotCost + forgemageCost) / quantity;
   }
 
   /**
-   * Investissement total = coût craft + coût forgemagie
+   * Investissement total = Coût du lot + Coût de fm
    */
   private static calculateTotalInvestment(
-    craftCost: number,
+    lotCost: number,
     forgemageCost: number
   ): number {
-    return craftCost + forgemageCost;
+    return lotCost + forgemageCost;
   }
 
   /**
-   * Bénéfice par item = (prix vente * 0.96) - coût unitaire
+   * Bénéfice par item = (Prix de vente unitaire * 0.96) - Coût par item
    */
   private static calculateProfitPerItem(
     salePrice: number,
-    unitCraftCost: number
+    costPerItem: number
   ): number {
     const priceAfterTax = salePrice * (1 - this.MARKET_TAX);
-    return priceAfterTax - unitCraftCost;
+    return priceAfterTax - costPerItem;
   }
 
   /**
-   * Bénéfice total = bénéfice par item * quantité
+   * Bénéfice total = Bénéfice par item * Quantité
    */
   private static calculateTotalProfit(
     profitPerItem: number,
@@ -100,14 +100,15 @@ export class CalculatorService {
   }
 
   /**
-   * Rendement = prix vente / coût unitaire
+   * Rendement = (Prix de vente unitaire * 0.96) / Coût par item
    */
   private static calculateYield(
     salePrice: number,
-    unitCraftCost: number
+    costPerItem: number
   ): number {
-    if (unitCraftCost <= 0) return 0;
-    return (salePrice / unitCraftCost) * 100;
+    if (costPerItem <= 0) return 0;
+    const priceAfterTax = salePrice * (1 - this.MARKET_TAX);
+    return priceAfterTax / costPerItem; // Pas multiplié par 100
   }
 
   /**
