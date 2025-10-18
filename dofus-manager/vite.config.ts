@@ -1,4 +1,3 @@
-
 import { defineConfig } from 'vite';
 import tailwindcss from '@tailwindcss/vite';
 
@@ -20,5 +19,11 @@ export default defineConfig({
     alias: {
       '@': '/src'
     }
+  },
+  // IMPORTANT: Configuration pour le router SPA
+  preview: {
+    port: 5173,
+    strictPort: false,
+    host: true
   }
 });

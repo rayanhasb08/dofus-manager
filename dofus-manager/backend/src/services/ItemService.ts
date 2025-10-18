@@ -44,8 +44,9 @@ export class ItemService {
    * Met à jour un item
    */
   async updateItem(data: UpdateItemDTO): Promise<ItemWithCalculations | null> {
-    if (data.name !== undefined || data.craftCost !== undefined) {
-      this.validateItemData(data as CreateItemDTO);
+    // Validation seulement si les champs sont fournis
+    if (Object.keys(data).length > 1) { // Plus que juste l'ID
+      this.validateItemData(data as Partial<CreateItemDTO>);
     }
     
     const item = await this.repository.update(data);
@@ -116,8 +117,8 @@ export class ItemService {
       throw new Error('Le nom de l\'item est requis');
     }
 
-    if (data.craftCost !== undefined && data.craftCost < 0) {
-      throw new Error('Le coût de craft ne peut pas être négatif');
+    if (data.lotCost !== undefined && data.lotCost < 0) {
+      throw new Error('Le coût du lot ne peut pas être négatif');
     }
 
     if (data.forgemageCost !== undefined && data.forgemageCost < 0) {

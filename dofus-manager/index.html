@@ -7,214 +7,163 @@
 </head>
 <body class="bg-slate-950 text-slate-50 antialiased">
   
-  <div x-data="itemManager">
+  <div x-data="app">
     
+    <!-- Header avec Navigation -->
     <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-xl sticky top-0 z-40">
-      <div class="container mx-auto px-6 py-6">
+      <div class="container mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
-          <div>
-            <h1 class="text-2xl font-semibold text-slate-50">Kamas Manager</h1>
-            <p class="text-sm text-slate-400 mt-0.5">Gestion de craft & forgemagie</p>
+          <div class="flex items-center gap-8">
+            <div>
+              <h1 class="text-2xl font-semibold text-slate-50">Kamas Manager</h1>
+              <p class="text-sm text-slate-400 mt-0.5">Gestion de craft & forgemagie</p>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="hidden md:flex items-center gap-2">
+              <template x-for="route in routes" :key="route.path">
+                <a 
+                  :href="route.path" 
+                  data-link
+                  class="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                  :class="currentRoute?.path === route.path ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'"
+                  x-text="route.title"
+                ></a>
+              </template>
+            </nav>
           </div>
           
-          <button @click="openCreateModal()" type="button" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium rounded-lg">
-            <span class="flex items-center gap-2">
-              <span>+</span>
-              Nouvel item
-            </span>
+          <!-- Mobile Menu Button -->
+          <button 
+            @click="mobileMenuOpen = !mobileMenuOpen" 
+            class="md:hidden p-2 text-slate-400 hover:text-slate-200"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
           </button>
         </div>
+
+        <!-- Mobile Menu -->
+        <nav 
+          x-show="mobileMenuOpen" 
+          x-cloak
+          class="md:hidden mt-4 pb-2 space-y-2"
+        >
+          <template x-for="route in routes" :key="route.path">
+            <a 
+              :href="route.path" 
+              data-link
+              @click="mobileMenuOpen = false"
+              class="block px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+              :class="currentRoute?.path === route.path ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'"
+              x-text="route.title"
+            ></a>
+          </template>
+        </nav>
       </div>
     </header>
 
+    <!-- Main Content -->
     <main class="container mx-auto px-6 py-8">
-
-      <div x-show="loading && items.length === 0" class="text-center py-12">
-        <div class="spinner w-10 h-10 mx-auto mb-4"></div>
-        <p class="text-slate-400">Chargement...</p>
-      </div>
-
-      <div x-show="error" class="mb-6 bg-red-500/10 border border-red-500/20 rounded-xl p-4">
-        <p class="text-red-400 text-sm" x-text="error"></p>
-      </div>
-
-      <div x-show="items.length > 0" class="mb-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          
-          <div class="stat-card">
-            <span class="text-xs font-medium text-slate-400 uppercase block mb-2">Items</span>
-            <p class="text-2xl font-semibold" x-text="stats ? stats.totalItems : 0"></p>
+      
+      <!-- Home Page -->
+      <div x-show="currentRoute?.component === 'home'" x-cloak>
+        <div class="max-w-4xl mx-auto text-center py-16">
+          <div class="w-20 h-20 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center mx-auto mb-6">
+            <span class="text-4xl">💰</span>
           </div>
+          <h2 class="text-4xl font-bold mb-4">Bienvenue sur Kamas Manager</h2>
+          <p class="text-xl text-slate-400 mb-8">
+            Gérez vos crafts et votre forgemagie efficacement
+          </p>
           
-          <div class="stat-card">
-            <span class="text-xs font-medium text-slate-400 uppercase block mb-2">Investissement</span>
-            <p class="text-2xl font-semibold" x-text="stats ? formatKamas(stats.totalInvestment) : '0 K'"></p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+            <div class="card p-6 hover:border-blue-500/30 cursor-pointer" @click="navigate('/items')">
+              <div class="text-3xl mb-3">📦</div>
+              <h3 class="text-lg font-semibold mb-2">Gestion des Items</h3>
+              <p class="text-sm text-slate-400">Ajoutez et suivez vos items craftés</p>
+            </div>
+            
+            <div class="card p-6 hover:border-blue-500/30 cursor-pointer" @click="navigate('/stats')">
+              <div class="text-3xl mb-3">📊</div>
+              <h3 class="text-lg font-semibold mb-2">Statistiques</h3>
+              <p class="text-sm text-slate-400">Analysez vos performances</p>
+            </div>
+            
+            <div class="card p-6 hover:border-blue-500/30 cursor-pointer" @click="navigate('/settings')">
+              <div class="text-3xl mb-3">⚙️</div>
+              <h3 class="text-lg font-semibold mb-2">Paramètres</h3>
+              <p class="text-sm text-slate-400">Configurez l'application</p>
+            </div>
           </div>
-          
-          <div class="stat-card">
-            <span class="text-xs font-medium text-slate-400 uppercase block mb-2">Bénéfice</span>
-            <p class="text-2xl font-semibold" :class="stats && stats.totalProfit > 0 ? 'text-emerald-400' : 'text-red-400'" x-text="stats ? formatKamas(stats.totalProfit) : '0 K'"></p>
-          </div>
-          
-          <div class="stat-card">
-            <span class="text-xs font-medium text-slate-400 uppercase block mb-2">Rendement</span>
-            <p class="text-2xl font-semibold" x-text="stats && stats.averageYield ? formatPercent(stats.averageYield) : '0%'"></p>
-          </div>
-          
         </div>
       </div>
 
-      <div x-show="items.length > 0" class="mb-6 card p-4">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-          
-          <div>
-            <label class="block text-xs font-medium text-slate-400 uppercase mb-2">Recherche</label>
-            <input type="text" x-model="filters.search" @input="updateFilters({ search: $event.target.value })" placeholder="Nom..." class="w-full px-3 py-2 text-sm">
-          </div>
-          
-          <div>
-            <label class="block text-xs font-medium text-slate-400 uppercase mb-2">Difficulté</label>
-            <select x-model="filters.difficulty" @change="updateFilters({ difficulty: $event.target.value })" class="w-full px-3 py-2 text-sm">
-              <option value="all">Toutes</option>
-              <option value="Facile">Facile</option>
-              <option value="Moyen">Moyen</option>
-              <option value="Difficile">Difficile</option>
-            </select>
-          </div>
-          
-          <div>
-            <label class="block text-xs font-medium text-slate-400 uppercase mb-2">Rendement min</label>
-            <input type="number" x-model.number="filters.minYield" @input="updateFilters({ minYield: Number($event.target.value) })" class="w-full px-3 py-2 text-sm">
-          </div>
-          
-          <div class="flex items-end">
-            <button @click="resetFilters()" type="button" class="w-full px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm rounded-lg">
-              Réinitialiser
-            </button>
-          </div>
-          
-        </div>
+      <!-- Items Page -->
+      <div x-show="currentRoute?.component === 'items'" x-cloak x-data="itemManager">
+        <div x-html="itemsPageContent"></div>
       </div>
 
-      <div x-show="items.length > 0" class="card overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="w-full">
-            <thead>
-              <tr>
-                <th @click="sort('name')" class="text-left cursor-pointer">Nom</th>
-                <th class="text-right">Coût du lot</th>
-                <th class="text-right">Coût de fm</th>
-                <th class="text-center">Difficulté</th>
-                <th class="text-center">Quantité</th>
-                <th class="text-right">Prix vente unit.</th>
-                <th @click="sort('costPerItem')" class="text-right cursor-pointer">Coût/item</th>
-                <th @click="sort('totalInvestment')" class="text-right cursor-pointer">Investissement</th>
-                <th @click="sort('profitPerItem')" class="text-right cursor-pointer">Bénéfice/item</th>
-                <th @click="sort('totalProfit')" class="text-right cursor-pointer">Bénéfice total</th>
-                <th @click="sort('yield')" class="text-right cursor-pointer">Rendement</th>
-                <th class="text-center">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <template x-for="item in items">
-                <tr :key="item.id">
-                  <td class="font-medium" x-text="item.name"></td>
-                  <td class="text-right text-slate-300" x-text="formatKamas(item.lotCost)"></td>
-                  <td class="text-right text-slate-300" x-text="formatKamas(item.forgemageCost)"></td>
-                  <td class="text-center">
-                    <span class="badge" :class="{'badge-success': item.difficulty === 'Facile', 'badge-warning': item.difficulty === 'Moyen', 'badge-error': item.difficulty === 'Difficile'}" x-text="item.difficulty"></span>
-                  </td>
-                  <td class="text-center text-slate-300" x-text="item.quantity"></td>
-                  <td class="text-right text-slate-300" x-text="formatKamas(item.salePrice)"></td>
-                  <td class="text-right text-amber-400 font-medium" x-text="item.calculations ? formatKamas(item.calculations.costPerItem) : '-'"></td>
-                  <td class="text-right text-blue-400 font-medium" x-text="item.calculations ? formatKamas(item.calculations.totalInvestment) : '-'"></td>
-                  <td class="text-right font-medium" :class="item.calculations && item.calculations.profitPerItem > 0 ? 'text-emerald-400' : 'text-red-400'" x-text="item.calculations ? formatKamas(item.calculations.profitPerItem) : '-'"></td>
-                  <td class="text-right font-semibold text-base" :class="item.calculations && item.calculations.totalProfit > 0 ? 'text-emerald-400' : 'text-red-400'" x-text="item.calculations ? formatKamas(item.calculations.totalProfit) : '-'"></td>
-                  <td class="text-right text-violet-400 font-medium" x-text="item.calculations ? formatPercent(item.calculations.yield) : '-'"></td>
-                  <td>
-                    <div class="flex items-center justify-center gap-2">
-                      <button @click="openEditModal(item)" type="button" class="icon-btn">✏️</button>
-                      <button @click="deleteItem(item)" type="button" class="icon-btn">🗑️</button>
-                    </div>
-                  </td>
-                </tr>
-              </template>
-            </tbody>
-          </table>
-        </div>
+      <!-- Stats Page -->
+      <div x-show="currentRoute?.component === 'stats'" x-cloak x-data="statsPage">
+        <div x-html="statsPageContent"></div>
       </div>
 
-      <div x-show="!loading && items.length === 0" class="text-center py-16">
-        <div class="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center mx-auto mb-4">
-          <span class="text-3xl">📦</span>
+      <!-- Settings Page -->
+      <div x-show="currentRoute?.component === 'settings'" x-cloak>
+        <div class="max-w-2xl mx-auto">
+          <h2 class="text-2xl font-bold mb-6">Paramètres</h2>
+          
+          <div class="space-y-4">
+            <div class="card p-6">
+              <h3 class="text-lg font-semibold mb-4">Configuration de l'API</h3>
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-sm font-medium text-slate-300 mb-2">URL de l'API Backend</label>
+                  <input 
+                    type="text" 
+                    value="http://localhost:3000/api"
+                    class="w-full px-3 py-2.5 text-sm"
+                    placeholder="http://localhost:3000/api"
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="card p-6">
+              <h3 class="text-lg font-semibold mb-4">Apparence</h3>
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-sm font-medium text-slate-300 mb-2">Thème</label>
+                  <select class="w-full px-3 py-2.5 text-sm">
+                    <option value="dark" selected>Sombre</option>
+                    <option value="light">Clair</option>
+                    <option value="auto">Automatique</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="card p-6">
+              <h3 class="text-lg font-semibold mb-4">À propos</h3>
+              <div class="text-sm text-slate-400 space-y-2">
+                <p>Version: 1.0.0</p>
+                <p>Kamas Manager - Gestion de craft et forgemagie pour Dofus</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <h3 class="text-xl font-semibold mb-2">Aucun item</h3>
-        <p class="text-slate-400 text-sm mb-6">Commencez par ajouter votre premier item</p>
-        <button @click="openCreateModal()" type="button" class="px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium rounded-xl inline-flex items-center gap-2">
-          <span>+</span>
-          Ajouter un item
-        </button>
       </div>
 
     </main>
 
-    <div x-show="showModal" x-cloak @click.self="closeModal()" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div @click.stop class="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        
-        <div class="px-6 py-5 border-b border-slate-800 flex items-center justify-between">
-          <h2 class="text-xl font-semibold" x-text="modalMode === 'create' ? 'Nouvel item' : 'Modifier'"></h2>
-          <button @click="closeModal()" type="button" class="text-slate-400 hover:text-slate-200">✕</button>
-        </div>
-
-        <form @submit.prevent="submitForm()" class="p-6 space-y-5">
-          
-          <div>
-            <label class="block text-sm font-medium text-slate-300 mb-2">Nom</label>
-            <input type="text" x-model="formData.name" class="w-full px-3 py-2.5 text-sm" placeholder="Ex: Anneau Brisach">
-            <p x-show="formErrors.name" class="text-red-400 text-xs mt-1" x-text="formErrors.name"></p>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-slate-300 mb-2">Coût du lot (K)</label>
-              <input type="number" x-model.number="formData.lotCost" class="w-full px-3 py-2.5 text-sm" min="0" step="0.01">
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-slate-300 mb-2">Coût de fm (K)</label>
-              <input type="number" x-model.number="formData.forgemageCost" class="w-full px-3 py-2.5 text-sm" min="0" step="0.01">
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-slate-300 mb-2">Difficulté</label>
-              <select x-model="formData.difficulty" class="w-full px-3 py-2.5 text-sm">
-                <option value="Facile">Facile</option>
-                <option value="Moyen">Moyen</option>
-                <option value="Difficile">Difficile</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-slate-300 mb-2">Quantité</label>
-              <input type="number" x-model.number="formData.quantity" class="w-full px-3 py-2.5 text-sm" min="1">
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-slate-300 mb-2">Prix de vente unitaire (K)</label>
-            <input type="number" x-model.number="formData.salePrice" class="w-full px-3 py-2.5 text-sm" min="0" step="0.01">
-          </div>
-
-          <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-800">
-            <button type="button" @click="closeModal()" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm rounded-lg">
-              Annuler
-            </button>
-            <button type="submit" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-sm rounded-lg" x-text="modalMode === 'create' ? 'Créer' : 'Sauvegarder'"></button>
-          </div>
-
-        </form>
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 mt-16">
+      <div class="container mx-auto px-6 py-6 text-center text-sm text-slate-400">
+        <p>Kamas Manager © 2025 - Fait avec ❤️ pour la communauté Dofus</p>
       </div>
-    </div>
+    </footer>
 
   </div>
 
