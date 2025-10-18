@@ -1,0 +1,75 @@
+<!-- Stats Avancées (3 cartes) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+  
+  <!-- Répartition par Difficulté -->
+  <div class="card p-6">
+    <h3 class="text-sm font-semibold text-slate-400 uppercase mb-4">Répartition par Difficulté</h3>
+    <div class="space-y-3">
+      <template x-for="stat in difficultyStats" :key="stat.difficulty">
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-sm font-medium" x-text="stat.difficulty"></span>
+            <span class="text-sm text-slate-400">
+              <span x-text="stat.count"></span> items (<span x-text="stat.percentage"></span>%)
+            </span>
+          </div>
+          <div class="w-full bg-slate-800 rounded-full h-2">
+            <div 
+              class="h-2 rounded-full" 
+              :class="getDifficultyColor(stat.difficulty)"
+              :style="`width: ${stat.percentage}%`"
+            ></div>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+
+  <!-- Analyse de Rentabilité -->
+  <div class="card p-6">
+    <h3 class="text-sm font-semibold text-slate-400 uppercase mb-4">Analyse de Rentabilité</h3>
+    <div class="space-y-3">
+      <div class="flex items-center justify-between p-3 bg-emerald-500/10 rounded-lg">
+        <div>
+          <p class="text-xs text-slate-400">Items Rentables</p>
+          <p class="text-lg font-semibold text-emerald-400" x-text="profitableCount"></p>
+        </div>
+        <span class="text-2xl">✅</span>
+      </div>
+      <div class="flex items-center justify-between p-3 bg-red-500/10 rounded-lg">
+        <div>
+          <p class="text-xs text-slate-400">Items en Perte</p>
+          <p class="text-lg font-semibold text-red-400" x-text="unprofitableCount"></p>
+        </div>
+        <span class="text-2xl">❌</span>
+      </div>
+      <div class="flex items-center justify-between p-3 bg-slate-800 rounded-lg">
+        <div>
+          <p class="text-xs text-slate-400">Taux de Réussite</p>
+          <p class="text-lg font-semibold text-slate-200" x-text="successRate + '%'"></p>
+        </div>
+        <span class="text-2xl">🎯</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Valeurs Moyennes -->
+  <div class="card p-6">
+    <h3 class="text-sm font-semibold text-slate-400 uppercase mb-4">Valeurs Moyennes</h3>
+    <div class="space-y-3">
+      <div>
+        <p class="text-xs text-slate-400 mb-1">Coût moyen par item</p>
+        <p class="text-lg font-semibold text-amber-400" x-text="formatKamas(averageCostPerItem)"></p>
+      </div>
+      <div>
+        <p class="text-xs text-slate-400 mb-1">Bénéfice moyen par item</p>
+        <p class="text-lg font-semibold text-emerald-400" x-text="formatKamas(averageProfitPerItem)"></p>
+      </div>
+      <div>
+        <p class="text-xs text-slate-400 mb-1">Investissement moyen</p>
+        <p class="text-lg font-semibold text-blue-400" x-text="formatKamas(averageInvestment)"></p>
+      </div>
+    </div>
+  </div>
+
+</div>

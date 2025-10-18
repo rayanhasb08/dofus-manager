@@ -1,0 +1,48 @@
+<!-- Table des items -->
+<div class="card overflow-hidden">
+  <div class="overflow-x-auto">
+    <table class="w-full">
+      <thead>
+        <tr>
+          <th @click="sort('name')" class="cursor-pointer">Nom</th>
+          <th @click="sort('lotCost')" class="cursor-pointer">Coût du lot</th>
+          <th @click="sort('forgemageCost')" class="cursor-pointer">Coût de fm</th>
+          <th>Difficulté</th>
+          <th>Quantité</th>
+          <th @click="sort('salePrice')" class="cursor-pointer">Prix vente unit.</th>
+          <th @click="sort('costPerItem')" class="cursor-pointer">Coût/item</th>
+          <th @click="sort('totalInvestment')" class="cursor-pointer">Investissement</th>
+          <th @click="sort('profitPerItem')" class="cursor-pointer">Bénéfice/item</th>
+          <th @click="sort('totalProfit')" class="cursor-pointer">Bénéfice total</th>
+          <th @click="sort('yield')" class="cursor-pointer">Rendement</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <template x-for="(item, index) in items" :key="item.id">
+          <tr>
+            <td x-text="item.name"></td>
+            <td x-text="formatKamas(item.lotCost)"></td>
+            <td x-text="formatKamas(item.forgemageCost)"></td>
+            <td>
+              <span class="badge" :class="getDifficultyBadgeClass(item.difficulty)" x-text="item.difficulty"></span>
+            </td>
+            <td x-text="item.quantity"></td>
+            <td x-text="formatKamas(item.salePrice)"></td>
+            <td x-text="formatKamas(item.calculations.costPerItem)"></td>
+            <td x-text="formatKamas(item.calculations.totalInvestment)"></td>
+            <td :class="item.calculations.profitPerItem > 0 ? 'text-emerald-400' : 'text-red-400'" x-text="formatKamas(item.calculations.profitPerItem)"></td>
+            <td :class="item.calculations.totalProfit > 0 ? 'text-emerald-400' : 'text-red-400'" x-text="formatKamas(item.calculations.totalProfit)"></td>
+            <td x-text="formatPercent(item.calculations.yield)"></td>
+            <td>
+              <div class="flex items-center justify-center gap-2">
+                <button @click="openEditModal(item)" type="button" class="icon-btn">✏️</button>
+                <button @click="deleteItem(item)" type="button" class="icon-btn">🗑️</button>
+              </div>
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+  </div>
+</div>

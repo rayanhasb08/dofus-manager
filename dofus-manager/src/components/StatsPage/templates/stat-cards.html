@@ -1,0 +1,50 @@
+<!-- Stats Principales (4 cartes) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+  <!-- Total Items -->
+  <div class="stat-card">
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-xs font-medium text-slate-400 uppercase">Total Items</span>
+      <span class="text-2xl">📦</span>
+    </div>
+    <p class="text-3xl font-bold" x-text="stats.totalItems"></p>
+    <p class="text-xs text-slate-500 mt-1">Items en inventaire</p>
+  </div>
+
+  <!-- Investissement Total -->
+  <div class="stat-card">
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-xs font-medium text-slate-400 uppercase">Investissement Total</span>
+      <span class="text-2xl">💰</span>
+    </div>
+    <p class="text-3xl font-bold text-blue-400" x-text="formatKamas(stats.totalInvestment)"></p>
+    <p class="text-xs text-slate-500 mt-1">Capital engagé</p>
+  </div>
+
+  <!-- Bénéfice Total -->
+  <div class="stat-card">
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-xs font-medium text-slate-400 uppercase">Bénéfice Total</span>
+      <span class="text-2xl" x-text="stats.totalProfit > 0 ? '📈' : '📉'"></span>
+    </div>
+    <p 
+      class="text-3xl font-bold"
+      :class="stats.totalProfit > 0 ? 'text-emerald-400' : 'text-red-400'"
+      x-text="formatKamas(stats.totalProfit)"
+    ></p>
+    <p 
+      class="text-xs mt-1"
+      :class="stats.totalProfit > 0 ? 'text-emerald-500' : 'text-red-500'"
+      x-text="formatProfitPercent(stats.totalProfit, stats.totalInvestment)"
+    ></p>
+  </div>
+
+  <!-- Rendement Moyen -->
+  <div class="stat-card">
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-xs font-medium text-slate-400 uppercase">Rendement Moyen</span>
+      <span class="text-2xl">⚡</span>
+    </div>
+    <p class="text-3xl font-bold text-violet-400" x-text="formatPercent(stats.averageYield)"></p>
+    <p class="text-xs text-slate-500 mt-1">Coefficient multiplicateur</p>
+  </div>
+</div>

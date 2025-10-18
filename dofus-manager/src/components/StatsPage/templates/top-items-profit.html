@@ -1,0 +1,52 @@
+<!-- Top 10 Items par Bénéfice -->
+<div class="card p-6">
+  <div class="flex items-center justify-between mb-6">
+    <div class="flex items-center gap-3">
+      <span class="text-2xl">🎖️</span>
+      <div>
+        <h3 class="text-lg font-semibold">Top 10 Items par Bénéfice</h3>
+        <p class="text-xs text-slate-400">Classement des items les plus performants</p>
+      </div>
+    </div>
+  </div>
+  <div class="space-y-3">
+    <template x-for="(item, index) in topItemsByProfit" :key="item.id">
+      <div class="flex items-center gap-4 p-4 bg-slate-800/50 rounded-xl hover:bg-slate-800 transition-all">
+        <!-- Rank Badge -->
+        <div 
+          class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center"
+          :class="getRankColor(index)"
+        >
+          <span class="text-lg font-bold">#<span x-text="index + 1"></span></span>
+        </div>
+        
+        <!-- Item Info -->
+        <div class="flex-grow min-w-0">
+          <p class="font-semibold text-sm truncate" x-text="item.name"></p>
+          <div class="flex items-center gap-3 mt-1">
+            <span 
+              class="badge badge-sm" 
+              :class="getDifficultyBadgeClass(item.difficulty)"
+              x-text="item.difficulty"
+            ></span>
+            <span class="text-xs text-slate-400">
+              Qty: <span x-text="item.quantity"></span>
+            </span>
+          </div>
+        </div>
+        
+        <!-- Stats -->
+        <div class="flex-shrink-0 text-right">
+          <p 
+            class="text-sm font-semibold"
+            :class="item.calculations.totalProfit > 0 ? 'text-emerald-400' : 'text-red-400'"
+            x-text="formatKamas(item.calculations.totalProfit)"
+          ></p>
+          <p class="text-xs text-slate-400 mt-0.5">
+            Rendement: <span x-text="formatPercent(item.calculations.yield)"></span>
+          </p>
+        </div>
+      </div>
+    </template>
+  </div>
+</div>

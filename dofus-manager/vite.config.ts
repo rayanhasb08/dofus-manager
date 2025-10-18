@@ -20,6 +20,7 @@ export default defineConfig({
       '@': '/src'
     }
   },
+  assetsInclude: ['**/*.html'],
   // IMPORTANT: Configuration pour le router SPA
   preview: {
     port: 5173,
