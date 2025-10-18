@@ -65,5 +65,8 @@ export interface FilterOptions {
   search: string;
   difficulty: ForgemagieDifficulty | 'all';
   minYield: number;
-  maxYield: number;
+  maxYield: number | typeof Infinity;
+  minLotCost: number;
+  maxLotCost: number | typeof Infinity;
+  minProfit: number;
 }

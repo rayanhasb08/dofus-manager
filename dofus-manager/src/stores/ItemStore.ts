@@ -25,7 +25,10 @@ export class ItemStore {
     search: '',
     difficulty: 'all',
     minYield: 0,
-    maxYield: 1000
+    maxYield: Infinity,
+    minLotCost: 0,
+    maxLotCost: Infinity,
+    minProfit: -Infinity
   };
 
   constructor(private readonly apiService: ApiService) {}
@@ -37,6 +40,10 @@ export class ItemStore {
     return this.applyFiltersAndSort(this.items);
   }
 
+  getAllItemsWithoutFilter(): ItemWithCalculations[] {
+    return this.items;
+  }
+  
   getStats(): ItemStats | null {
     return this.stats;
   }
@@ -166,7 +173,10 @@ export class ItemStore {
       search: '',
       difficulty: 'all',
       minYield: 0,
-      maxYield: 1000
+      maxYield: Infinity,
+      minLotCost: 0,
+      maxLotCost: Infinity,
+      minProfit: -Infinity
     };
   }
 
@@ -195,6 +205,17 @@ export class ItemStore {
     filtered = filtered.filter(item => 
       item.calculations.yield >= this.filters.minYield &&
       item.calculations.yield <= this.filters.maxYield
+    );
+
+    // Filtre par coût du lot
+    filtered = filtered.filter(item =>
+      item.lotCost >= this.filters.minLotCost &&
+      item.lotCost <= this.filters.maxLotCost
+    );
+
+    // Filtre par bénéfice total
+    filtered = filtered.filter(item =>
+      item.calculations.totalProfit >= this.filters.minProfit
     );
 
     // Tri
