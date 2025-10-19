@@ -1,26 +1,26 @@
 <!-- Filtres de recherche -->
-<div class="mb-6 card p-4">
-  <h3 class="text-lg font-semibold mb-4">Filtres de recherche</h3>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="filters-section">
+  <h3 class="filters-title">Filtres de recherche</h3>
+  <div class="filters-grid">
     <!-- Recherche par nom -->
-    <div>
-      <label class="block text-xs font-medium text-slate-400 uppercase mb-2">Nom</label>
+    <div class="filter-group">
+      <label class="filter-label">Nom</label>
       <input 
         type="text" 
         x-model="filters.search" 
         @input="updateFilters({ search: $event.target.value })" 
         placeholder="Rechercher..." 
-        class="w-full px-3 py-2 text-sm"
+        class="input"
       >
     </div>
 
     <!-- Difficulté -->
-    <div>
-      <label class="block text-xs font-medium text-slate-400 uppercase mb-2">Difficulté</label>
+    <div class="filter-group">
+      <label class="filter-label">Difficulté</label>
       <select 
         x-model="filters.difficulty" 
         @change="updateFilters({ difficulty: $event.target.value })" 
-        class="w-full px-3 py-2 text-sm"
+        class="input"
       >
         <option value="all">Toutes</option>
         <option value="Facile">Facile</option>
@@ -30,73 +30,73 @@
     </div>
 
     <!-- Rendement minimum -->
-    <div>
-      <label class="block text-xs font-medium text-slate-400 uppercase mb-2">Rendement min</label>
+    <div class="filter-group">
+      <label class="filter-label">Rendement min</label>
       <input 
         type="number" 
         x-model.number="filters.minYield" 
         @input="updateFilters({ minYield: Number($event.target.value) })" 
         placeholder="Ex: 1.2"
         step="0.1"
-        class="w-full px-3 py-2 text-sm"
+        class="input"
       >
     </div>
 
     <!-- Rendement maximum -->
-    <div>
-      <label class="block text-xs font-medium text-slate-400 uppercase mb-2">Rendement max</label>
+    <div class="filter-group">
+      <label class="filter-label">Rendement max</label>
       <input 
         type="number" 
         x-model.number="filters.maxYield" 
         @input="updateFilters({ maxYield: Number($event.target.value) })" 
         placeholder="Ex: 2.0"
         step="0.1"
-        class="w-full px-3 py-2 text-sm"
+        class="input"
       >
     </div>
 
     <!-- Coût lot minimum -->
-    <div>
-      <label class="block text-xs font-medium text-slate-400 uppercase mb-2">Coût lot min (K)</label>
+    <div class="filter-group">
+      <label class="filter-label">Coût lot min (K)</label>
       <input 
         type="number" 
         x-model.number="filters.minLotCost" 
         @input="updateFilters({ minLotCost: Number($event.target.value) })" 
         placeholder="0"
-        class="w-full px-3 py-2 text-sm"
+        class="input"
       >
     </div>
 
     <!-- Coût lot maximum -->
-    <div>
-      <label class="block text-xs font-medium text-slate-400 uppercase mb-2">Coût lot max (K)</label>
+    <div class="filter-group">
+      <label class="filter-label">Coût lot max (K)</label>
       <input 
         type="number" 
         x-model.number="filters.maxLotCost" 
         @input="updateFilters({ maxLotCost: Number($event.target.value) })" 
         placeholder="Illimité"
-        class="w-full px-3 py-2 text-sm"
+        class="input"
       >
     </div>
 
     <!-- Bénéfice minimum -->
-    <div>
-      <label class="block text-xs font-medium text-slate-400 uppercase mb-2">Bénéfice min (K)</label>
+    <div class="filter-group">
+      <label class="filter-label">Bénéfice min (K)</label>
       <input 
         type="number" 
         x-model.number="filters.minProfit" 
         @input="updateFilters({ minProfit: Number($event.target.value) })" 
         placeholder="-999999"
-        class="w-full px-3 py-2 text-sm"
+        class="input"
       >
     </div>
 
     <!-- Bouton Reset -->
-    <div class="flex items-end">
+    <div class="filter-group filter-reset">
       <button 
         @click="resetFilters()" 
         type="button" 
-        class="w-full px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm rounded-lg flex items-center justify-center gap-2"
+        class="btn btn-secondary btn-block"
       >
         <span>🔄</span>
         Réinitialiser

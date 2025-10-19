@@ -1,0 +1,14 @@
+/* ====================================
+   MAIN LAYOUT
+   ==================================== */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+}
+
+.main {
+  padding: var(--spacing-2xl) 0;
+  min-height: calc(100vh - 200px);
+}

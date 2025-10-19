@@ -1,20 +1,20 @@
 <!-- Table des items -->
-<div class="card overflow-hidden">
-  <div class="overflow-x-auto">
-    <table class="w-full">
+<div class="card">
+  <div class="table-container">
+    <table>
       <thead>
         <tr>
-          <th @click="sort('name')" class="cursor-pointer">Nom</th>
-          <th @click="sort('lotCost')" class="cursor-pointer">Coût du lot</th>
-          <th @click="sort('forgemageCost')" class="cursor-pointer">Coût de fm</th>
+          <th @click="sort('name')" class="sortable">Nom</th>
+          <th @click="sort('lotCost')" class="sortable">Coût du lot</th>
+          <th @click="sort('forgemageCost')" class="sortable">Coût de fm</th>
           <th>Difficulté</th>
           <th>Quantité</th>
-          <th @click="sort('salePrice')" class="cursor-pointer">Prix vente unit.</th>
-          <th @click="sort('costPerItem')" class="cursor-pointer">Coût/item</th>
-          <th @click="sort('totalInvestment')" class="cursor-pointer">Investissement</th>
-          <th @click="sort('profitPerItem')" class="cursor-pointer">Bénéfice/item</th>
-          <th @click="sort('totalProfit')" class="cursor-pointer">Bénéfice total</th>
-          <th @click="sort('yield')" class="cursor-pointer">Rendement</th>
+          <th @click="sort('salePrice')" class="sortable">Prix vente unit.</th>
+          <th @click="sort('costPerItem')" class="sortable">Coût/item</th>
+          <th @click="sort('totalInvestment')" class="sortable">Investissement</th>
+          <th @click="sort('profitPerItem')" class="sortable">Bénéfice/item</th>
+          <th @click="sort('totalProfit')" class="sortable">Bénéfice total</th>
+          <th @click="sort('yield')" class="sortable">Rendement</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -31,11 +31,11 @@
             <td x-text="formatKamas(item.salePrice)"></td>
             <td x-text="formatKamas(item.calculations.costPerItem)"></td>
             <td x-text="formatKamas(item.calculations.totalInvestment)"></td>
-            <td :class="item.calculations.profitPerItem > 0 ? 'text-emerald-400' : 'text-red-400'" x-text="formatKamas(item.calculations.profitPerItem)"></td>
-            <td :class="item.calculations.totalProfit > 0 ? 'text-emerald-400' : 'text-red-400'" x-text="formatKamas(item.calculations.totalProfit)"></td>
+            <td :class="item.calculations.profitPerItem > 0 ? 'profit-positive' : 'profit-negative'" x-text="formatKamas(item.calculations.profitPerItem)"></td>
+            <td :class="item.calculations.totalProfit > 0 ? 'profit-positive' : 'profit-negative'" x-text="formatKamas(item.calculations.totalProfit)"></td>
             <td x-text="formatPercent(item.calculations.yield)"></td>
             <td>
-              <div class="flex items-center justify-center gap-2">
+              <div class="table-actions">
                 <button @click="openEditModal(item)" type="button" class="icon-btn">✏️</button>
                 <button @click="deleteItem(item)" type="button" class="icon-btn">🗑️</button>
               </div>

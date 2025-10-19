@@ -96,7 +96,7 @@ export function createStatsPage(itemStore: ItemStore) {
 
       // Loading
       if (this.loading) {
-        return '<div class="text-center py-12"><div class="spinner w-10 h-10 mx-auto"></div></div>';
+        return '<div class="loading-state"><div class="spinner"></div></div>';
       }
 
       // État vide
@@ -111,15 +111,15 @@ export function createStatsPage(itemStore: ItemStore) {
     // Construction de la page complète
     buildStatsPage() {
       return `
-        <div class="max-w-7xl mx-auto space-y-8">
+        <div class="stats-page-container">
           
           <!-- En-tête -->
-          <div class="flex items-center justify-between">
+          <div class="stats-page-header">
             <div>
-              <h2 class="text-3xl font-bold">Statistiques Globales</h2>
-              <p class="text-slate-400 text-sm mt-1">Analyse complète de vos activités de craft & forgemagie</p>
+              <h2 class="stats-page-title">Statistiques Globales</h2>
+              <p class="stats-page-subtitle">Analyse complète de vos activités de craft & forgemagie</p>
             </div>
-            <button onclick="window.router.navigate('/items')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm rounded-lg">
+            <button onclick="window.router.navigate('/items')" class="btn btn-secondary">
               ← Retour aux items
             </button>
           </div>

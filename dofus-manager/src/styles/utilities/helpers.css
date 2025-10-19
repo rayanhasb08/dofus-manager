@@ -1,0 +1,28 @@
+/* ====================================
+   HELPER CLASSES
+   ==================================== */
+
+/* Profit/Loss colors */
+.profit-positive {
+  color: var(--color-success);
+}
+
+.profit-negative {
+  color: var(--color-error);
+}
+
+/* Rentability classes */
+.rentability-positive {
+  background: var(--color-success-bg);
+  border: 1px solid var(--color-success-border);
+}
+
+.rentability-negative {
+  background: var(--color-error-bg);
+  border: 1px solid var(--color-error-border);
+}
+
+.rentability-neutral {
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+}

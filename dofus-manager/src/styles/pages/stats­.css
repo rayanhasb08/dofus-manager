@@ -1,0 +1,338 @@
+/* ====================================
+   STATS PAGE
+   ==================================== */
+
+.stats-page-container {
+  max-width: 85rem;
+  margin: 0 auto;
+}
+
+.stats-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.stats-page-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.stats-page-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-top: var(--spacing-xs);
+}
+
+/* Stat cards */
+.stat-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.stat-card {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+}
+
+.stat-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-sm);
+}
+
+.stat-card-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-card-icon {
+  font-size: 1.5rem;
+}
+
+.stat-card-value {
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.stat-card-description {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin-top: var(--spacing-xs);
+}
+
+/* Advanced stats */
+.stats-advanced-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.difficulty-list,
+.rentability-list,
+.averages-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.difficulty-item,
+.rentability-item,
+.average-item {
+  padding: var(--spacing-md);
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-md);
+}
+
+.difficulty-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-xs);
+  font-size: 0.875rem;
+}
+
+.difficulty-name {
+  font-weight: 500;
+}
+
+.difficulty-count {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 0.5rem;
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  transition: width var(--transition-slow);
+}
+
+.rentability-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rentability-label {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.rentability-value {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.rentability-icon {
+  font-size: 1.5rem;
+}
+
+.average-label {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.average-value {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+/* Extreme items */
+.extreme-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.extreme-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.extreme-icon {
+  font-size: 1.875rem;
+}
+
+.extreme-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.extreme-subtitle {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.extreme-content {
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+}
+
+.extreme-item-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+}
+
+.extreme-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
+}
+
+.extreme-stat-label {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.extreme-stat-value {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-top: var(--spacing-xs);
+}
+
+/* Top items */
+.top-items-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-xl);
+}
+
+.top-items-title-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.top-items-icon {
+  font-size: 1.5rem;
+}
+
+.top-items-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.top-items-subtitle {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.top-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.top-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg);
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-lg);
+}
+
+.top-item-rank {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-tertiary);
+}
+
+.top-item-rank-number {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.top-item-info {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.top-item-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top-item-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xs);
+}
+
+.top-item-quantity {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.top-item-stats {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.top-item-profit {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.top-item-yield {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin-top: 0.125rem;
+}
+
+.top-item-yield-primary {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #a78bfa;
+}
+
+.top-item-profit-label {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin-top: 0.125rem;
+}
+
+@media (max-width: 768px) {
+  .stats-page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-lg);
+  }
+  
+  .extreme-items-grid {
+    grid-template-columns: 1fr;
+  }
+}

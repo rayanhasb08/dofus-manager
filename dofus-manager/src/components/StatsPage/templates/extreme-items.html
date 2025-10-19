@@ -1,48 +1,48 @@
 <!-- Items Extrêmes (Most/Least Profitable) -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="extreme-items-grid">
   
   <!-- Item le Plus Rentable -->
   <template x-if="stats.mostProfitable">
-    <div class="card p-6">
-      <div class="flex items-center gap-3 mb-4">
-        <span class="text-3xl">🏆</span>
+    <div class="card">
+      <div class="extreme-header">
+        <span class="extreme-icon">🏆</span>
         <div>
-          <h3 class="text-lg font-semibold">Item le Plus Rentable</h3>
-          <p class="text-xs text-slate-400">Meilleur bénéfice total</p>
+          <h3 class="extreme-title">Item le Plus Rentable</h3>
+          <p class="extreme-subtitle">Meilleur bénéfice total</p>
         </div>
       </div>
-      <div class="bg-slate-800/50 rounded-xl p-4">
-        <p class="text-xl font-bold mb-3" x-text="stats.mostProfitable.name"></p>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <p class="text-xs text-slate-400">Difficulté</p>
+      <div class="extreme-content">
+        <p class="extreme-item-name" x-text="stats.mostProfitable.name"></p>
+        <div class="extreme-stats-grid">
+          <div class="extreme-stat">
+            <p class="extreme-stat-label">Difficulté</p>
             <span 
-              class="badge mt-1" 
+              class="badge" 
               :class="getDifficultyBadgeClass(stats.mostProfitable.difficulty)"
               x-text="stats.mostProfitable.difficulty"
             ></span>
           </div>
-          <div>
-            <p class="text-xs text-slate-400">Quantité</p>
-            <p class="text-sm font-semibold mt-1">
+          <div class="extreme-stat">
+            <p class="extreme-stat-label">Quantité</p>
+            <p class="extreme-stat-value">
               <span x-text="stats.mostProfitable.quantity"></span> items
             </p>
           </div>
-          <div>
-            <p class="text-xs text-slate-400">Investissement</p>
-            <p class="text-sm font-semibold text-blue-400 mt-1" x-text="formatKamas(stats.mostProfitable.calculations.totalInvestment)"></p>
+          <div class="extreme-stat">
+            <p class="extreme-stat-label">Investissement</p>
+            <p class="extreme-stat-value" x-text="formatKamas(stats.mostProfitable.calculations.totalInvestment)"></p>
           </div>
-          <div>
-            <p class="text-xs text-slate-400">Bénéfice Total</p>
-            <p class="text-sm font-semibold text-emerald-400 mt-1" x-text="formatKamas(stats.mostProfitable.calculations.totalProfit)"></p>
+          <div class="extreme-stat">
+            <p class="extreme-stat-label">Bénéfice Total</p>
+            <p class="extreme-stat-value profit-positive" x-text="formatKamas(stats.mostProfitable.calculations.totalProfit)"></p>
           </div>
-          <div>
-            <p class="text-xs text-slate-400">Rendement</p>
-            <p class="text-sm font-semibold text-violet-400 mt-1" x-text="formatPercent(stats.mostProfitable.calculations.yield)"></p>
+          <div class="extreme-stat">
+            <p class="extreme-stat-label">Rendement</p>
+            <p class="extreme-stat-value" x-text="formatPercent(stats.mostProfitable.calculations.yield)"></p>
           </div>
-          <div>
-            <p class="text-xs text-slate-400">Bénéfice/item</p>
-            <p class="text-sm font-semibold text-emerald-400 mt-1" x-text="formatKamas(stats.mostProfitable.calculations.profitPerItem)"></p>
+          <div class="extreme-stat">
+            <p class="extreme-stat-label">Bénéfice/item</p>
+            <p class="extreme-stat-value profit-positive" x-text="formatKamas(stats.mostProfitable.calculations.profitPerItem)"></p>
           </div>
         </div>
       </div>
@@ -51,52 +51,52 @@
 
   <!-- Item le Moins Rentable -->
   <template x-if="stats.leastProfitable">
-    <div class="card p-6">
-      <div class="flex items-center gap-3 mb-4">
-        <span class="text-3xl">📉</span>
+    <div class="card">
+      <div class="extreme-header">
+        <span class="extreme-icon">📉</span>
         <div>
-          <h3 class="text-lg font-semibold">Item le Moins Rentable</h3>
-          <p class="text-xs text-slate-400">À améliorer ou éviter</p>
+          <h3 class="extreme-title">Item le Moins Rentable</h3>
+          <p class="extreme-subtitle">À améliorer ou éviter</p>
         </div>
       </div>
-      <div class="bg-slate-800/50 rounded-xl p-4">
-        <p class="text-xl font-bold mb-3" x-text="stats.leastProfitable.name"></p>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <p class="text-xs text-slate-400">Difficulté</p>
+      <div class="extreme-content">
+        <p class="extreme-item-name" x-text="stats.leastProfitable.name"></p>
+        <div class="extreme-stats-grid">
+          <div class="extreme-stat">
+            <p class="extreme-stat-label">Difficulté</p>
             <span 
-              class="badge mt-1" 
+              class="badge" 
               :class="getDifficultyBadgeClass(stats.leastProfitable.difficulty)"
               x-text="stats.leastProfitable.difficulty"
             ></span>
           </div>
-          <div>
-            <p class="text-xs text-slate-400">Quantité</p>
-            <p class="text-sm font-semibold mt-1">
+          <div class="extreme-stat">
+            <p class="extreme-stat-label">Quantité</p>
+            <p class="extreme-stat-value">
               <span x-text="stats.leastProfitable.quantity"></span> items
             </p>
           </div>
-          <div>
-            <p class="text-xs text-slate-400">Investissement</p>
-            <p class="text-sm font-semibold text-blue-400 mt-1" x-text="formatKamas(stats.leastProfitable.calculations.totalInvestment)"></p>
+          <div class="extreme-stat">
+            <p class="extreme-stat-label">Investissement</p>
+            <p class="extreme-stat-value" x-text="formatKamas(stats.leastProfitable.calculations.totalInvestment)"></p>
           </div>
-          <div>
-            <p class="text-xs text-slate-400">Bénéfice Total</p>
+          <div class="extreme-stat">
+            <p class="extreme-stat-label">Bénéfice Total</p>
             <p 
-              class="text-sm font-semibold mt-1"
-              :class="stats.leastProfitable.calculations.totalProfit > 0 ? 'text-emerald-400' : 'text-red-400'"
+              class="extreme-stat-value"
+              :class="stats.leastProfitable.calculations.totalProfit > 0 ? 'profit-positive' : 'profit-negative'"
               x-text="formatKamas(stats.leastProfitable.calculations.totalProfit)"
             ></p>
           </div>
-          <div>
-            <p class="text-xs text-slate-400">Rendement</p>
-            <p class="text-sm font-semibold text-violet-400 mt-1" x-text="formatPercent(stats.leastProfitable.calculations.yield)"></p>
+          <div class="extreme-stat">
+            <p class="extreme-stat-label">Rendement</p>
+            <p class="extreme-stat-value" x-text="formatPercent(stats.leastProfitable.calculations.yield)"></p>
           </div>
-          <div>
-            <p class="text-xs text-slate-400">Bénéfice/item</p>
+          <div class="extreme-stat">
+            <p class="extreme-stat-label">Bénéfice/item</p>
             <p 
-              class="text-sm font-semibold mt-1"
-              :class="stats.leastProfitable.calculations.profitPerItem > 0 ? 'text-emerald-400' : 'text-red-400'"
+              class="extreme-stat-value"
+              :class="stats.leastProfitable.calculations.profitPerItem > 0 ? 'profit-positive' : 'profit-negative'"
               x-text="formatKamas(stats.leastProfitable.calculations.profitPerItem)"
             ></p>
           </div>

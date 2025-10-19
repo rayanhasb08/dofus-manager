@@ -1,50 +1,52 @@
 <!-- Stats Principales (4 cartes) -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="stat-cards-grid">
+  
   <!-- Total Items -->
   <div class="stat-card">
-    <div class="flex items-center justify-between mb-2">
-      <span class="text-xs font-medium text-slate-400 uppercase">Total Items</span>
-      <span class="text-2xl">📦</span>
+    <div class="stat-card-header">
+      <span class="stat-card-label">Total Items</span>
+      <span class="stat-card-icon">📦</span>
     </div>
-    <p class="text-3xl font-bold" x-text="stats.totalItems"></p>
-    <p class="text-xs text-slate-500 mt-1">Items en inventaire</p>
+    <p class="stat-card-value" x-text="stats.totalItems"></p>
+    <p class="stat-card-description">Items en inventaire</p>
   </div>
 
   <!-- Investissement Total -->
   <div class="stat-card">
-    <div class="flex items-center justify-between mb-2">
-      <span class="text-xs font-medium text-slate-400 uppercase">Investissement Total</span>
-      <span class="text-2xl">💰</span>
+    <div class="stat-card-header">
+      <span class="stat-card-label">Investissement Total</span>
+      <span class="stat-card-icon">💰</span>
     </div>
-    <p class="text-3xl font-bold text-blue-400" x-text="formatKamas(stats.totalInvestment)"></p>
-    <p class="text-xs text-slate-500 mt-1">Capital engagé</p>
+    <p class="stat-card-value" x-text="formatKamas(stats.totalInvestment)"></p>
+    <p class="stat-card-description">Capital engagé</p>
   </div>
 
   <!-- Bénéfice Total -->
   <div class="stat-card">
-    <div class="flex items-center justify-between mb-2">
-      <span class="text-xs font-medium text-slate-400 uppercase">Bénéfice Total</span>
-      <span class="text-2xl" x-text="stats.totalProfit > 0 ? '📈' : '📉'"></span>
+    <div class="stat-card-header">
+      <span class="stat-card-label">Bénéfice Total</span>
+      <span class="stat-card-icon" x-text="stats.totalProfit > 0 ? '📈' : '📉'"></span>
     </div>
     <p 
-      class="text-3xl font-bold"
-      :class="stats.totalProfit > 0 ? 'text-emerald-400' : 'text-red-400'"
+      class="stat-card-value"
+      :class="stats.totalProfit > 0 ? 'profit-positive' : 'profit-negative'"
       x-text="formatKamas(stats.totalProfit)"
     ></p>
     <p 
-      class="text-xs mt-1"
-      :class="stats.totalProfit > 0 ? 'text-emerald-500' : 'text-red-500'"
+      class="stat-card-description"
+      :class="stats.totalProfit > 0 ? 'profit-positive' : 'profit-negative'"
       x-text="formatProfitPercent(stats.totalProfit, stats.totalInvestment)"
     ></p>
   </div>
 
   <!-- Rendement Moyen -->
   <div class="stat-card">
-    <div class="flex items-center justify-between mb-2">
-      <span class="text-xs font-medium text-slate-400 uppercase">Rendement Moyen</span>
-      <span class="text-2xl">⚡</span>
+    <div class="stat-card-header">
+      <span class="stat-card-label">Rendement Moyen</span>
+      <span class="stat-card-icon">⚡</span>
     </div>
-    <p class="text-3xl font-bold text-violet-400" x-text="formatPercent(stats.averageYield)"></p>
-    <p class="text-xs text-slate-500 mt-1">Coefficient multiplicateur</p>
+    <p class="stat-card-value" x-text="formatPercent(stats.averageYield)"></p>
+    <p class="stat-card-description">Coefficient multiplicateur</p>
   </div>
+  
 </div>

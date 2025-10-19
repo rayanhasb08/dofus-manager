@@ -97,19 +97,19 @@ export function createItemsPage(itemStore: ItemStore) {
     // Construction de la page "aucun résultat"
     buildNoResultsPage() {
       return `
-        ${filtersTemplate}
-        
-        <div class="mb-4 flex justify-between items-center">
-          <p class="text-sm text-slate-400">0 item(s) affiché(s)</p>
-          <button @click="openCreateModal()" type="button" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium rounded-lg">
-            <span class="flex items-center gap-2">
+        <div class="container">
+          ${filtersTemplate}
+          
+          <div class="items-header">
+            <p class="items-count">0 item(s) affiché(s)</p>
+            <button @click="openCreateModal()" type="button" class="btn btn-primary">
               <span>+</span>
               Nouvel item
-            </span>
-          </button>
-        </div>
+            </button>
+          </div>
 
-        ${noResultsTemplate}
+          ${noResultsTemplate}
+        </div>
       `;
     },
 
@@ -118,27 +118,27 @@ export function createItemsPage(itemStore: ItemStore) {
       const itemCount = this.items.length;
       
       return `
-        ${this.error ? `
-          <div class="mb-6 bg-red-500/10 border border-red-500/20 rounded-xl p-4">
-            <p class="text-red-400 text-sm">${this.error}</p>
-          </div>
-        ` : ''}
+        <div class="container">
+          ${this.error ? `
+            <div class="error-banner">
+              <p>${this.error}</p>
+            </div>
+          ` : ''}
 
-        ${filtersTemplate}
+          ${filtersTemplate}
 
-        <div class="mb-4 flex justify-between items-center">
-          <p class="text-sm text-slate-400">
-            <span>${itemCount}</span> item(s) affiché(s)
-          </p>
-          <button @click="openCreateModal()" type="button" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium rounded-lg">
-            <span class="flex items-center gap-2">
+          <div class="items-header">
+            <p class="items-count">
+              <span>${itemCount}</span> item(s) affiché(s)
+            </p>
+            <button @click="openCreateModal()" type="button" class="btn btn-primary">
               <span>+</span>
               Nouvel item
-            </span>
-          </button>
-        </div>
+            </button>
+          </div>
 
-        ${tableTemplate}
+          ${tableTemplate}
+        </div>
       `;
     },
 
