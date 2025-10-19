@@ -115,49 +115,8 @@
       </div>
 
       <!-- Settings Page -->
-      <div x-show="currentRoute?.component === 'settings'" x-cloak>
-        <div class="settings-container">
-          <h2 class="settings-title">Paramètres</h2>
-          
-          <div class="settings-sections">
-            <div class="settings-section">
-              <h3 class="section-title">Configuration de l'API</h3>
-              <div class="section-content">
-                <div>
-                  <label class="label">URL de l'API Backend</label>
-                  <input 
-                    type="text" 
-                    value="http://localhost:3000/api"
-                    class="input"
-                    placeholder="http://localhost:3000/api"
-                  >
-                </div>
-              </div>
-            </div>
-
-            <div class="settings-section">
-              <h3 class="section-title">Apparence</h3>
-              <div class="section-content">
-                <div>
-                  <label class="label">Thème</label>
-                  <select class="input">
-                    <option value="dark" selected>Sombre</option>
-                    <option value="light">Clair</option>
-                    <option value="auto">Automatique</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div class="settings-section">
-              <h3 class="section-title">À propos</h3>
-              <div class="section-content">
-                <p>Version: 1.0.0</p>
-                <p>Kamas Manager - Gestion de craft et forgemagie pour Dofus</p>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div x-show="currentRoute?.component === 'settings'" x-cloak x-data="settingsPage">
+        <div x-html="settingsPageContent"></div>
       </div>
 
     </main>

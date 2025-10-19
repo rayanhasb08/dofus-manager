@@ -2,6 +2,13 @@
    ITEMS PAGE
    ==================================== */
 
+/* Container principal */
+.items-page-container {
+  max-width: 85rem;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+}
+
 /* Error banner */
 .error-banner {
   background: var(--color-error-bg);

@@ -97,7 +97,7 @@ export function createItemsPage(itemStore: ItemStore) {
     // Construction de la page "aucun résultat"
     buildNoResultsPage() {
       return `
-        <div class="container">
+        <div class="items-page-container">
           ${filtersTemplate}
           
           <div class="items-header">
@@ -118,7 +118,7 @@ export function createItemsPage(itemStore: ItemStore) {
       const itemCount = this.items.length;
       
       return `
-        <div class="container">
+        <div class="items-page-container">
           ${this.error ? `
             <div class="error-banner">
               <p>${this.error}</p>
@@ -141,7 +141,6 @@ export function createItemsPage(itemStore: ItemStore) {
         </div>
       `;
     },
-
     // Méthodes utilitaires (disponibles dans les templates)
     formatKamas,
     formatPercent,

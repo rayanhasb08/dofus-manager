@@ -4,6 +4,7 @@ import { ApiService } from './services/ApiService';
 import { ItemStore } from './stores/ItemStore';
 import { createItemsPage } from './components/ItemPage';
 import { createStatsPage } from './components/StatsPage';
+import { createSettingsPage } from './components/SettingsPage';  // ← AJOUT
 import { RouteConfig } from './router/types';
 import './style.css';
 
@@ -34,7 +35,10 @@ Alpine.data('app', () => ({
 Alpine.data('itemManager', () => createItemsPage(itemStore));
 
 // Alpine Component: Page des Statistiques
-Alpine.data('statsPage', () => createStatsPage(itemStore));  // ← MODIFIÉ
+Alpine.data('statsPage', () => createStatsPage(itemStore));
+
+// Alpine Component: Page des Paramètres  ← AJOUT
+Alpine.data('settingsPage', () => createSettingsPage());
 
 // Start Alpine
 Alpine.start();
