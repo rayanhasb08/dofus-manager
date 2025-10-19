@@ -22,13 +22,22 @@
 
 /* Filters */
 .filters-section {
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-2xl);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
 }
 
+
 .filters-title {
-  font-size: 1.125rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 700;
   margin-bottom: var(--spacing-lg);
+  color: var(--color-text-primary);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .filters-grid {
@@ -60,30 +69,46 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
 }
 
 .items-count {
   font-size: 0.875rem;
   color: var(--color-text-secondary);
+  font-weight: 500;
 }
 
-/* Empty states */
-.empty-state {
+.items-count span {
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: 1.125rem;
+}
+
+/* Empty states avec animations */
+.empty-state,
+.no-results {
   text-align: center;
   padding: var(--spacing-4xl) var(--spacing-lg);
+  animation: fadeIn var(--transition-slow);
 }
 
-.empty-state-icon {
-  width: 4rem;
-  height: 4rem;
+.empty-state-icon,
+.no-results-icon {
+  width: 5rem;
+  height: 5rem;
   border-radius: var(--radius-full);
-  background: var(--color-bg-tertiary);
+  background: linear-gradient(135deg, var(--color-bg-tertiary), var(--color-bg-elevated));
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto var(--spacing-lg);
-  font-size: 2rem;
+  margin: 0 auto var(--spacing-xl);
+  font-size: 2.5rem;
+  box-shadow: var(--shadow-lg);
+  animation: float 3s ease-in-out infinite;
 }
 
 .empty-state-title {
@@ -98,24 +123,6 @@
   margin-bottom: var(--spacing-xl);
 }
 
-/* No results */
-.no-results {
-  text-align: center;
-  padding: var(--spacing-3xl) var(--spacing-lg);
-}
-
-.no-results-icon {
-  width: 4rem;
-  height: 4rem;
-  border-radius: var(--radius-full);
-  background: var(--color-bg-tertiary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto var(--spacing-lg);
-  font-size: 2rem;
-}
-
 .no-results-title {
   font-size: 1.25rem;
   font-weight: 600;
@@ -125,4 +132,26 @@
 .no-results-description {
   font-size: 0.875rem;
   color: var(--color-text-secondary);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Profit colors avec glow */
+tbody td.profit-positive {
+  color: var(--color-success);
+  font-weight: 600;
+  text-shadow: 0 0 10px var(--color-success-glow);
+}
+
+tbody td.profit-negative {
+  color: var(--color-error);
+  font-weight: 600;
+  text-shadow: 0 0 10px var(--color-error-glow);
 }
