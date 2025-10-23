@@ -69,18 +69,14 @@ export function createSettingsPage() {
                 <div class="about-grid">
                   <div class="about-item">
                     <span class="about-label">Version</span>
-                    <span class="about-value">1.0.0</span>
+                    <span class="about-value">0.1.0</span>
                   </div>
                   <div class="about-item">
                     <span class="about-label">Application</span>
-                    <span class="about-value">Kamas Manager</span>
+                    <span class="about-value">Dofus Manager</span>
                   </div>
                   <div class="about-item">
-                    <span class="about-label">Description</span>
-                    <span class="about-value">Gestion de craft et forgemagie pour Dofus</span>
-                  </div>
-                  <div class="about-item">
-                    <span class="about-label">Technologie</span>
+                    <span class="about-label">Tech</span>
                     <span class="about-value">Alpine.js + Tailwind CSS</span>
                   </div>
                 </div>

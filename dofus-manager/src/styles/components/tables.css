@@ -3,15 +3,30 @@
    ==================================== */
 
 .table-container {
-  overflow-x: auto;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
+  width: 100%;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed; /* Force les colonnes à utiliser l'espace disponible */
 }
+
+/* Définir des largeurs optimales pour chaque colonne */
+table thead th:nth-child(1) { width: 12%; } /* Nom */
+table thead th:nth-child(2) { width: 8%; } /* Coût du lot */
+table thead th:nth-child(3) { width: 8%; } /* Coût de fm */
+table thead th:nth-child(4) { width: 7%; } /* Difficulté */
+table thead th:nth-child(5) { width: 6%; } /* Quantité */
+table thead th:nth-child(6) { width: 9%; } /* Prix vente unit. */
+table thead th:nth-child(7) { width: 8%; } /* Coût/item */
+table thead th:nth-child(8) { width: 10%; } /* Investissement */
+table thead th:nth-child(9) { width: 9%; } /* Bénéfice/item */
+table thead th:nth-child(10) { width: 10%; } /* Bénéfice total */
+table thead th:nth-child(11) { width: 7%; } /* Rendement */
+table thead th:nth-child(12) { width: 6%; } /* Actions */
 
 thead th {
   padding: 1rem var(--spacing-md);
@@ -26,6 +41,7 @@ thead th {
   position: sticky;
   top: 0;
   z-index: 10;
+  white-space: nowrap; /* AJOUT: Empêche le retour à la ligne dans les en-têtes */
 }
 
 thead th.sortable {
@@ -56,6 +72,17 @@ tbody td {
   font-size: 0.875rem;
   border-bottom: 1px solid var(--color-border);
   transition: all var(--transition-base);
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* La colonne Nom peut afficher du texte sur plusieurs lignes si nécessaire */
+tbody td:first-child {
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: 1.4;
 }
 
 tbody tr {
@@ -79,4 +106,25 @@ tbody tr:last-child td {
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
+  position: relative; /* AJOUT: Important pour le z-index */
+  z-index: 1; /* AJOUT: Assure que les boutons sont au-dessus */
+}
+
+/* FIX: S'assurer que les boutons d'action sont cliquables */
+.table-actions .icon-btn {
+  pointer-events: auto; /* AJOUT: Force les boutons à être cliquables */
+  position: relative;
+  z-index: 2;
+}
+
+/* Responsive: Scroll horizontal uniquement sur petits écrans */
+@media (max-width: 1200px) {
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  table {
+    table-layout: auto;
+    min-width: 1200px; /* Force une largeur minimale */
+  }
 }

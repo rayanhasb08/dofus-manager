@@ -2,9 +2,9 @@
    ITEMS PAGE
    ==================================== */
 
-/* Container principal */
+/* Container principal - ÉLARGI */
 .items-page-container {
-  max-width: 85rem;
+  max-width: 100%; /* MODIFIÉ: Prend toute la largeur */
   margin: 0 auto;
   padding: 0 var(--spacing-xl);
 }
@@ -29,7 +29,6 @@
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-md);
 }
-
 
 .filters-title {
   font-size: 1rem;

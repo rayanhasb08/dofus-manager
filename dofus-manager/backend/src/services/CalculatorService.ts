@@ -100,15 +100,15 @@ export class CalculatorService {
   }
 
   /**
-   * Rendement = (Prix de vente unitaire * 0.96) / Coût par item
+   * Rendement = Prix de vente unitaire / Coût par item
+   * FORMULE MODIFIÉE : Sans appliquer les taxes
    */
   private static calculateYield(
     salePrice: number,
     costPerItem: number
   ): number {
     if (costPerItem <= 0) return 0;
-    const priceAfterTax = salePrice * (1 - this.MARKET_TAX);
-    return priceAfterTax / costPerItem; // Pas multiplié par 100
+    return salePrice / costPerItem;
   }
 
   /**
